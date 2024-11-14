@@ -1,0 +1,2487 @@
+---
+- summary: |
+    Авторизация на сайте.
+  requirement: |
+    Пользователь может авторизоваться на сайте через электронную почту и пароль.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Email = "123testmaster@gmail.com"
+    Password = "123testmaster"
+  steps:
+    - Нажимаем "Sign In"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Нажимаем "Submit"
+  expected-result: |
+    После успешной авторизации пользователь попадает на главную стравницу сайта "CodeBattle" (https://codebattle.hexlet.io/#lobby)
+    В правом верхнем углу отображены данные (аватар, Nickname) пользователя
+
+- summary: |
+    Регистрация на сайте.
+  requirement: |
+    Пользователь может зарегистрироваться на сайте.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123testmaster"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим"Password Confirmation"
+    - Нажимаем "Submit"
+  expected-result: |
+    Регистрация прошла успешно, пользователь попадает на главную стравницу сайта "CodeBattle" (https://codebattle.hexlet.io/#lobby)
+    В правом верхнем углу отображены данные (аватар, Nickname) пользователя
+
+- summary: |
+    Проверка уникальности никнейма.
+  requirement: |
+    При регистрации система должна проверять никнейм на уникальность.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123testmaster"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим"Password Confirmation"
+    - Нажимаем "Submit"
+  expected-result: |
+    Зарегистрироваться не получится, если никнейм уже занят другим пользователем. Поле  "Nickname" будет выделено красным цветом с комментарием, что данный никнейм уже занят
+
+- summary: |
+    Проверка работы ограничения по количеству символов никнейма при регистрации.
+  requirement: |
+    Никнейм должен быть ограничен по количеству символов.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster1testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123testmaster"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим"Password Confirmation"
+    - Нажимаем "Submit"
+  expected-result: |
+    Зарегистрироваться не получится, если никнейм превышает допустимое количество символов. Поле  "Nickname" будет выделено красным цветом с комментарием, что количество символов должно быть от 3 до 16
+
+- summary: |
+    При регистрации нельзя указать некорректную электронную почту.
+  requirement: |
+    Электронная почта должна проверяться на корректность.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster$gmail.co"
+    Password = "123testmaster"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим"Password Confirmation"
+    - Нажимаем "Submit"
+  expected-result: |
+    Зарегистрироваться не получится, если Email указан некорректно. Поле  "Email" будет выделено красным цветом
+
+- summary: |
+    Проверка работы ограничения по количеству символов пароля при регистрации.
+  requirement: |
+    Пароль должен быть ограничен по количеству символов.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим"Password Confirmation"
+    - Нажимаем "Submit"
+  expected-result: |
+    Зарегистрироваться не получится, если пароль не соответствует указанным нормам по количеству символов. Поле "Password" будет выделено красным цветом с комментарием, что количество символов должно быть от 6 до 16
+
+- summary: |
+    Пароль должен соответствовать требованиям безопасности.
+  requirement: |
+    Пароль должен соответствовать требованиям безопасности - минимум одна заглавная буква, минимум одна буква нижнего регистра, спецсимволы.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Вводим"Password Confirmation"
+    - Нажимаем "Submit"
+  expected-result: |
+    Зарегистрироваться не получится, если пароль не соответствует требованиям безопасности - минимум одна заглавная буква, минимум одна буква нижнего регистра, спецсимволы
+
+- summary: |
+    При регистрации должно быть поле для подтверждения пароля.
+  requirement: |
+    При создании пароля должно существовать второе поле - "Password Confirmation".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+  expected-result: |
+    После введения пароля пользователь может подтвердить пароль в специальном для этого поле
+
+- summary: |
+    Поля "Password" и "Password Confirmation" совпадают.
+  requirement: |
+    При регистрации при создании пароля поля "Password" и "Password Confirmation" совпадают.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Нажимаем "Sign Up"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Подтверждаем пароль в поле "Password Confirmation"
+  expected-result: |
+    При неверном введении пароля поле "Password Confirmation" будет выделено красным цветом с комментарием, что пароли не совпадают
+
+- summary: |
+    Есть возможность посмотреть/скрыть пароль.
+  requirement: |
+    При регистрации/авторизации пользователь может посмотреть/скрыть пароль.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Нажимаем "Sign Up"/"Sign In"
+    - Вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Рядом с полем "Password" есть кнопка, позволяющая показать/скрыть пароль
+  expected-result: |
+    При нажатии кнопки пароль можно увидеть/скрыть
+
+- summary: |
+    Есть возможность восстановить пароль.
+  requirement: |
+    Зарегистрированный пользователь должен иметь возможность восстановить пароль.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Нажимаем "Sign In"
+    - Нажимаем "Forgot your password?"
+  expected-result: |
+    Происходит переадресация на страницу (https://codebattle.hexlet.io/remind_password), где пользователь должен ввести Email для восстановления пароля
+
+- summary: |
+    Все поля при авторизации должны быть заполнены.
+  requirement: |
+    Авторизация невозможна, если хотя бы одно поле не заполнено.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Нажимаем "Sign In"
+    - Не вводим "Email"
+    - Вводим "Password"   
+  expected-result: |
+    Авторизация не выполняется, если оба поля "Email" и "Password" не заполнены
+
+- summary: |
+    Все поля при регистрации должны быть заполнены.
+  requirement: |
+    Регистрация невозможна, если хотя бы одно поле не заполнено.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Нажимаем "Sign Up"
+    - Не вводим "Nickname"
+    - Вводим "Email"
+    - Вводим "Password"
+    - Не вводим "Password Confirmation"
+    - Нажимаем "Submit" 
+  expected-result: |
+    Регистрация не выполняется, если все поля для ввода не заполнены
+
+- summary: |
+    У авторизованного пользователя на главной странице отображается чат с двумя каналами.
+  requirement: |
+    У чата на главной странице есть два канала - General и Notification.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - Авторизовываемся на сайте
+    - На главной странице видим чат
+    - По умолчанию находимся в канале "General"
+    - Можно переключить канал на "Notification"
+  expected-result: |
+    Каналы чата отображаются без ошибок, пользователь может переключать каналы между собой
+
+- summary: |
+    Существующие каналы нельзя удалить или переименовать.
+  requirement: |
+    Пользователь не может удалять или переименовывать существующие каналы.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - На главной странице видим чат
+    - По умолчанию находимся в канале "General"
+    - Можно переключить канал на "Notification"
+    - Пытаемся удалить/переименовать какой-нибудь из каналов
+  expected-result: |
+    Ни один из каналов нельзя удалить или переименовать
+
+- summary: |
+    Проверка работы отправки сообщения в чат.
+  requirement: |
+    Пользователь должен иметь возможность отправлять сообщения в чат.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - На главной странице видим чат
+    - По умолчанию находимся в канале "General"
+    - Вводим текст сообщения в поле для ввода
+    - Нажимаем "Send"
+  expected-result: |
+    Сообщение отправлено в чат
+
+- summary: |
+    Проверка видимости никнейма пользователя при отправлении сообщения в чат.
+  requirement: |
+    Другие пользователи могут видеть имя отправителя сообщения.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Отправляем в чат сообщение
+  expected-result: |
+    В чате видно никнейм пользователя, отправившего сообщение
+
+- summary: |
+    Проверка коммуникации в чате между пользователями.
+  requirement: |
+    Пользователь может напрямую отвечать другому пользователю в чате.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Отправляем сообщение в чат
+    - Ждем ответа от любого пользователя
+    - Левой кнопкой мыши нажимаем на никнейм и копируем его
+    - Вставляем скопированный никнейм в поле для ввода сообщения
+    - Пишем сообщение
+    - Нажимаем "Send"
+  expected-result: |
+    В чате отображается отправленное сообщение другому пользователю
+
+- summary: |
+    Проверка корректного отображения сообщений в чате.
+  requirement: |
+    Если сообщений в чате слишком много, то появляется полоса прокрутки.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Отправляем несколько сообщений в чат
+  expected-result: |
+    Когда сообщений становится слишком много, в чате справа появляется полоса прокрутки
+
+- summary: |
+    Проверка корректного отображения сообщений в каналах чата.
+  requirement: |
+    При переключении в канал, отображаются последние сообщения в чате.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Меняем канал на "Notification"
+    - Возвращаемся обратно в канал "General"
+  expected-result: |
+    При переключении отображаются последние отправленные сообщения в каналах чата
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    При клике на автора сообщения появляется модальное окно с возможными взаимодействиями с пользователем.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Выбираем любого пользователя, отправившего в чат сообщение
+    - Нажимаем на его никнейм
+  expected-result: |
+    После нажатия появляется модальное окно с опциями по взаимодействию с пользователем
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    Никнейм пользователя можно скопировать.  
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Выбираем любого пользователя, отправившего в чат сообщение
+    - Нажимаем на его никнейм
+    - После нажатия в модальном окне появляется несколько опций
+    - Выбираем "Copy Name"
+  expected-result: |
+    Никнейм пользователя успешно скопирован
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    Есть кнопка "Info" с переадресацией на страницу пользователя.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Выбираем любого пользователя, отправившего в чат сообщение
+    - Нажимаем на его никнейм
+    - После нажатия в модальном окне появляется несколько опций 
+    - Выбираем "Info"
+  expected-result: |
+    Система перенапрявляет нас на страницу пользователя
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    Есть кнопка "Follow", на пользователя можно подписаться и отслеживать его активность.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Выбираем любого пользователя, отправившего в чат сообщение
+    - Нажимаем на его никнейм
+    - После нажатия в модальном окне появляется несколько опций 
+    - Выбираем "Follow"
+  expected-result: |
+    Справа сверху возле аватарки авторизованного пользователя появляется красный бинокль, при наведении на него отображается ID отслеживаемого пользователя
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    Пользователю можно отправить личное сообщение.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Выбираем любого пользователя, отправившего в чат сообщение
+    - Нажимаем на его никнейм
+    - После нажатия в модальном окне появляется несколько опций 
+    - Выбираем "Direct message"
+  expected-result: |
+    Система создает приватный чат с выбранным пользователем
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    Пользователю можно отправить приглашение на игру.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+    - Выбираем любого пользователя, отправившего в чат сообщение
+    - Нажимаем на его никнейм
+    - После нажатия в модальном окне появляется несколько опций 
+    - Выбираем "Send an invite"
+  expected-result: |
+    Открывается модальное окно с игровыми параметрами, в поле "opponent" – пользователь, которому отправлено приглашение
+
+- summary: |
+    Возможные опции взаимодействия с другими пользователями в чате.
+  requirement: |
+    Пользователь может видеть, кто из других пользователей сейчас онлайн.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - По умолчанию находимся в канале "General"
+  expected-result: |
+    Справа от чата видно список пользователей, которые сейчас онлайн
+
+- summary: |
+    Пользователю доступна страница "Users rating".
+  requirement: |
+    Пользователь может просматривать рейтинг игроков за все время.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице справа находим таблицу "Leaderbord"
+    - Выбираем столбец "All"
+  expected-result: |
+    В таблице отображены последние семь пользователей с наивысшим рейтингом за все время
+
+- summary: |
+    Рейтинг пользователей обновляется автоматически.
+  requirement: |
+    Рейтинг обновляется автоматически в соответствии с успехами пользователей.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице справа находим таблицу "Leaderbord"
+  expected-result: |
+    Система автоматически обновляет рейтинг пользователей после каждой победы/поражения
+
+- summary: |
+    Проверка работы сортировки пользователей в таблице рейтинга.
+  requirement: |
+    Можно настроить сортировку по месту, рейтингу, сыгранным играм, дате авторизации на сайте.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице справа находим таблицу "Leaderbord"
+    - Нажимаем "Top list"
+    - Переходим на страницу с полным рейтингом пользователей
+    - Настраиваем нужную сортировку
+  expected-result: |
+    Пользователь может настроить сортировку по месту, рейтингу, сыгранным играм, дате авторизации на сайте.
+
+- summary: |
+    Проверка настройки фильтрации по количеству пользователей на странице.
+  requirement: |
+    Можно настроить фильтрацию отображения пользователей по их количеству на странице.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице справа находим таблицу "Leaderbord"
+    - Нажимаем "Top list"
+    - Переходим на страницу с полным рейтингом пользователей
+    - Справа сверху находим элемент с числовым количеством "Users per page"
+    - Выбираем нужное количество пользователей для отображения на странице
+  expected-result: |
+    Система показывает указанное при фильтрации количество пользователей на странице.
+
+- summary: |
+    Проверка работы чекбокса "With bots".
+  requirement: |
+    Рейтинг пользователей отображается с учетом игр, сыгранных с ботом, либо без него.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице справа находим таблицу "Leaderbord"
+    - Нажимаем "Top list"
+    - Переходим на страницу с полным рейтингом пользователей
+    - Справа сверху находим чекбокс "With bots"
+    - Ставим в нем галочку
+    - Убираем галочку
+  expected-result: |
+    Система показывает рейтинг пользователей, учитывая сыгранные игры с ботом/без бота.
+
+- summary: |
+    Поиск пользователя по никнейму в рейтинге пользователей.
+  requirement: |
+    На странице рейтинга есть поисковая строка по никнейму пользователя.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице справа находим таблицу "Leaderbord"
+    - Нажимаем "Top list"
+    - Переходим на страницу с полным рейтингом пользователей
+    - В поисковой строке начинаем вводить никнейм пользователя
+  expected-result: |
+    Система находит нужного пользователя по введенному никнейму.
+
+- summary: |
+    Пользователю доступна страница "Tasks".
+  requirement: |
+    Пользователь может просматривать задания, созданные другими пользователями.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Видим задания, созданные другими пользователями
+    - На строке каждого задания справа есть кнопка "Show"
+    - Нажимаем "Show"
+  expected-result: |
+    Открывается страница задания
+
+- summary: |
+    Пользователь может создавать задания.
+  requirement: |
+    Пользователь может создавать свои задания.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task"
+  expected-result: |
+    Открывается страница создания задания
+
+- summary: |
+    Пользователь может создавать задания.
+  requirement: |
+    Название задания должно быть уникальным.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task"
+    - В поле ввода "Name" вводим название задания
+    - Над полем "Name" прописано, что название задания должно быть уникальным
+  expected-result: |
+    Система не дает пользователю создать задание с уже существующим названием
+
+- summary: |
+    Пользователь может создавать задания.
+  requirement: |
+    Можно выбрать видимость задания "hidden/public".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task"
+    - В поле ввода "Visibility" выбираем нужный вариант
+  expected-result: |
+    Система создает задание с выбранной видимостью "hidden/public"
+
+- summary: |
+    Пользователь может создавать задания.
+  requirement: |
+    Можно выбрать уровень сложности.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task"
+    - В поле ввода "Level" выбираем нужный уровень сложности
+  expected-result: |
+    Система создает задание с выбранным уровнем сложности
+
+- summary: |
+    Пользователь может создавать задания.
+  requirement: |
+    Проверка создания задания, если заполнены не все поля.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task"
+    - Заполняем не все поля, обязательные для заполнения
+  expected-result: |
+    Система не позволяет создать задание, если заполнены не все поля
+
+- summary: |
+    Пользователь может создавать пакет заданий.
+  requirement: |
+    Пользователь может создавать свой пакет заданий.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task pack"
+  expected-result: |
+    Открывается страница создания задания
+
+- summary: |
+    Пользователь может создавать пакет заданий.
+  requirement: |
+    Название пака заданий должно быть уникальным.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task pack"
+    - В поле ввода "Name" вводим название
+    - Над полем "Name" прописано, что название задания должно быть уникальным
+  expected-result: |
+    Система не дает пользователю создать пак заданий с уже существующим названием
+
+- summary: |
+    Пользователь может создавать пакет заданий.
+  requirement: |
+    Можно выбрать видимость пака "hidden/public".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task pack"
+    - В поле ввода "Visibility" выбираем нужный вариант
+  expected-result: |
+    Система создает пак заданий с выбранной видимостью "hidden/public"
+
+- summary: |
+    Пользователь может создавать пакет заданий.
+  requirement: |
+    Можно выбрать id заданий, которые нужно объединить в один пак.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task pack"
+    - В поле ввода "Task_ids" вводим id заданий, которые хотим объединить 
+  expected-result: |
+    Система создает пак заданий с введенными "Task_ids"
+
+- summary: |
+    Пользователь может создавать пакет заданий.
+  requirement: |
+    Проверка создания пака заданий, если заполнены не все поля.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task pack"
+    - Заполняем не все поля, обязательные для заполнения
+  expected-result: |
+    Система не позволяет создать пак заданий, если заполнены не все поля
+
+- summary: |
+    Проверка удаления/редактирования заданий.
+  requirement: |
+    Созданные task и task pack можно редактировать/удалить.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+    - Выбираем "Tasks"
+    - Переходим на страницу заданий
+    - Нажимаем "Create new task"/"Create new task pack"
+    - Создаем новое задание/пак заданий
+    - При успешном создании система перенаправляет нас на страницу задания/пака заданий
+    - Под заданиями видим кнопки "Edit/Delete"
+    - Нажимаем "Edit"
+    - Редактируем и сохраняем
+    - Нажимаем "Delete"
+    - Во всплывающем окне нажимаем Ок
+  expected-result: |
+    Система позволяет пользователю удалять и редактировать созданные задания/паки заданий
+
+- summary: |
+    Пользователю доступен личный кабинет.
+  requirement: |
+    На главной странице в правом верхнем углу пользователю доступен личный кабинет.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации нажимаем на свой профиль в правом верхнем углу
+  expected-result: |
+    После авторизации в правом верхнем углу пользователю доступен личный кабинет
+
+- summary: |
+    Пользователю доступен личный кабинет.
+  requirement: |
+    В личном кабинете корректно отображается аватар пользователя.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+  expected-result: |
+    Аватар пользователя отображается корректно
+
+- summary: |
+    Пользователю доступна смена аватара в личном кабинете.
+  requirement: |
+    Фото(аватар) пользователя можно заменить.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "My profile"
+    - Нажимаем и переходим в личный кабинет
+    - Рядом с фото есть кнопка редактирования
+    - Нажимаем и меняем фото
+  expected-result: |
+    Старое фото(аватар) меняется на новое
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В личном кабинете пользователю доступны настройки.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+  expected-result: |
+    Открывается страница с доступными пользователю настройками
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В настройках доступна опция смены никнейма.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+    - В поле "Your name" вводим новый никнейм
+    - Нажимаем кнопку "Save"
+  expected-result: |
+    Новые настройки успешно сохранены, никнейм пользователя сменен
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В настройках пользователь может выбрать язык программирования как "Weapon".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+    - В поле "Your weapon" выбираем нужный язык программирования из предложенных
+    - Нажимаем кнопку "Save"
+  expected-result: |
+    Настройки сохранены, смена язык  программирования прошла успешно
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В настройках пользователь может выбрать "Clan".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+    - В поле "Clan" вводим нужное название
+    - Нажимаем кнопку "Save"
+  expected-result: |
+    Настройки сохранены, пользователь успешно указал выбранный "Clan"
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В настройках пользователь может выбрать "Sound type".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+    - Выбираем нужный "Sound type" из предложенных
+    - Нажимаем кнопку "Save"
+  expected-result: |
+    Настройки сохранены, пользователь успешно выбрал "Sound type"
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В настройках пользователь может выбрать "Sound level".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+    - Выбираем нужный "Sound level"
+    - Нажимаем кнопку "Save"
+  expected-result: |
+    Настройки сохранены, пользователь успешно выбрал "Sound level"
+
+- summary: |
+    Пользоватю доступны настройки в личном кабинете.
+  requirement: |
+    В настройках пользователь может добавить ссылки на свои аккаунты в GitHub и Discord.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Settings"
+    - Нажимаем и переходим в настройки
+    - В "Socials" выбираем, какую ссылку хотим добавить
+  expected-result: |
+    Настройки сохранены, пользователь успешно добавил ссылки на свои аккаунты в GitHub и Discord
+
+- summary: |
+    Выход из аккаунта.
+  requirement: |
+    Пользователь может выйти из аккаунта.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "Sign out"
+  expected-result: |
+    Пользователь вышел из своего аккаунта
+
+- summary: |
+    Пользователь видит свою статистику в личном кабинете.
+  requirement: |
+    В личном кабинете отображается статистика пользователя и завершенные игры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации в правом верхнем углу видим свой никнейм и аватар
+    - Нажимаем на никнейм
+    - В появившемся меню выбираем "My profile"
+    - Нажимаем и переходим в личный кабинет
+  expected-result: |
+    В личном кабинете отображается статистика пользователя и завершенные игры
+
+- summary: |
+    Пользователю доступна страница "Турниры/Tournaments".
+  requirement: |
+    Пользователь может просматривать страницу "Турниры/Tournaments".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+  expected-result: |
+    Открывается страница со списком турниров
+
+- summary: |
+    Пользователю доступна страница "Турниры/Tournaments".
+  requirement: |
+    Пользователь может видеть список турниров, которые проходят сейчас.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+  expected-result: |
+    Открывается страница со списком турниров, сверху отображаются текущие турниры
+
+- summary: |
+    Пользователю доступна страница "Турниры/Tournaments".
+  requirement: |
+    Пользователь может присоединиться к турнирам, которые проходят сейчас.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - В списке "Live tournaments" выбираем любой турнир и нажимаем кнопку "Show"
+    - В правом верхнем углу нажимаем кнопку "Join"
+  expected-result: |
+    Пользователь становится участником выбранного турнира
+
+- summary: |
+    Пользователю доступна страница "Турниры/Tournaments".
+  requirement: |
+    Пользователь может покинуть турнир.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - В списке "Live tournaments" выбираем любой турнир и нажимаем кнопку "Show"
+    - В правом верхнем углу нажимаем кнопку "Join"
+    - В правом верхнем углу нажимаем кнопку "Leave"
+  expected-result: |
+    Пользователь перестает быть участником выбранного турнира
+
+- summary: |
+    Пользователю доступна страница "Турниры/Tournaments".
+  requirement: |
+    Пользователь может видеть список завершенных турниров.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу вниз, до "Completed  tournaments"
+  expected-result: |
+    Пользователь видит завершенные турниры
+
+- summary: |
+    Пользователю доступна страница "Турниры/Tournaments".
+  requirement: |
+    У пользователя есть возможность создавать турниры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все необходимые поля
+     - Нажимаем "Create"
+  expected-result: |
+    Новый турнир успешно создан пользователем
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может выбрать тип турнира - individual/team/swiss/arena/versus.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В поле "Type" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может добавить описание турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В поле "Description" добавляем описание турнира
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может установить дату и время начала турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Starts at" устанавливаем нужную дату и время
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может выбрать тип доступа к турниру - public/token.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Access type" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может настроить task strategy -  random_per_game/random_per_round/sequential.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Task strategy" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может настроить score strategy - time_and_tests/win_loss/one_zero.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Score strategy" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может настроить task provider - level/task_pack/task_pack_per_round/all.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Task provider" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Пользователь может указать лимит по количеству пользователей для турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Players limit" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Есть возможность выбрать язык программирования для турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Default language" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Есть возможность выбрать уровень сложности для турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Level" выбираем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Есть возможность указать match timeout в секундах.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Match timeout seconds" устанавливаем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Есть возможность указать break duration в секундах.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Break duration seconds" устанавливаем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Есть возможность установить таймер для турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Break duration seconds" устанавливаем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Пользователь может создавать турниры.
+  requirement: |
+    Есть возможность добавить Event в турнир.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В графе "Event" устанавливаем нужный вариант
+    - Заполняем остальные поля
+     - Нажимаем "Create"
+  expected-result: |
+    Выбранные параметры применяются к созданному турниру
+
+- summary: |
+    Проверка работы чата турнира.
+  requirement: |
+    Пользователь может отправлять сообщения в чат турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира с чатом
+    - Отправляем приветственное сообщение в чат в поле для ввода
+  expected-result: |
+    Сообщение отправлено успешно и отображается в чате
+
+
+- summary: |
+    Проверка работы чата турнира.
+  requirement: |
+    В чате турнира пользователи могут видеть имя отправителя сообщения.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира с чатом
+    - Отправляем приветственное сообщение в чат в поле для ввода
+  expected-result: |
+    Пользователи видят имя отправителя сообщения
+
+- summary: |
+    Проверка работы чата турнира.
+  requirement: |
+    В чате турнира пользователь может писать сообщение другому участнику.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира с чатом
+    - В списке участников выбираем пользователя, которому хотим отправить сообщение
+    - Кликаем на его никнейм
+    - В открывшемся модальном окне выбираем "Direct message"
+    - В поле для ввода вводим сообщение
+  expected-result: |
+    Другому участнику турнира можно отправить сообщение
+
+
+- summary: |
+    Проверка работы чата турнира.
+  requirement: |
+    Если сообщений в чате слишком много, то появляется полоса прокрутки.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира с чатом
+    - В поле для ввода вводим несколько сообщений
+  expected-result: |
+    Когда сообщений становится слишком много, в чате справа появляется полоса прокрутки
+
+- summary: |
+    Удаление участников турнира.
+  requirement: |
+    Пользователь, создавший турнир, может удалять из него других участников.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира
+    - В списке участников выбираем пользователя, которого хотим удалить
+    - Нажимаем на никнейм, в модальном окне выбираем "Delete user"
+  expected-result: |
+    Пользователь удален из списка участников
+
+- summary: |
+    Проверка работы участия в турнире.
+  requirement: |
+    Пользователь может стать участником турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира
+    - В правом верхнем углу нажимаем кнопку "Join"
+  expected-result: |
+    Пользователь становится участником турнира
+
+
+- summary: |
+    Проверка работы участия в турнире.
+  requirement: |
+    Пользователь может покинуть турнир самостоятельно в любой момент.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира
+    - В правом верхнем углу нажимаем кнопку "Join"
+    - В правом верхнем углу нажимаем кнопку "Leave"
+  expected-result: |
+    Пользователь больше не является участником турнира
+
+- summary: |
+    Удаление созданного турнира.
+  requirement: |
+    Пользователь, создавший турнир, может его удалить.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - Заполняем все поля
+    - Нажимаем "Create"
+    - Созданный турнир появляется в списке "Live tournaments"
+    - На строке с информацией о созданном турнире нажимаем кнопку "Show"
+    - Переходим на страницу турнира
+    - В правом верхнем углу нажимаем на зеленую кнопку с тремя точками, открываем меню
+    - Из списка действий выбираем "Cancel"
+  expected-result: |
+    Турнир отменен и удален
+
+
+- summary: |
+    Доступ к турниру.
+  requirement: |
+    Турнир с типом доступа public доступен для участия всем пользователям.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В поле "Access" выбираем тип "public"
+    - Заполняем остальные поля
+    - Нажимаем "Create"
+  expected-result: |
+    Созданный турнир доступен всем пользователям
+
+- summary: |
+    Доступ к турниру.
+  requirement: |
+    Турнир с типом доступа token доступен пользователю, который его создал, и участникам данного турнира.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на столбец "Tournaments"
+    - Прокручиваем страницу до середины
+    - Между "Live tournaments" и "Completed  tournaments" нажимаем кнопку "Tournaments Info"
+    - Прокручиваем страницу вниз и видим область "Create a new tournament"
+    - В поле "Access" выбираем тип "token"
+    - Заполняем остальные поля
+    - Нажимаем "Create"
+  expected-result: |
+    Созданный турнир доступен только приглашенным пользователям и создателю турнира
+
+- summary: |
+    Создание игры.
+  requirement: |
+    Пользователь может самостоятельно создать игру.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Выбираем все нужные параметры
+    - Нажимаем "Create battle"
+  expected-result: |
+    Создана новая игра
+
+- summary: |
+    Создание игры.
+  requirement: |
+    При создании пользователь может выбрать уровень игры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В поле "Level" устанавливаем нужный уровень игры
+    - Выбираем все остальные параметры
+    - Нажимаем "Create battle"
+  expected-result: |
+    Создана новая игра с выбранным уровнем сложности
+
+- summary: |
+    Выбор соперника.
+  requirement: |
+    При создании пользователь может выбрать тип игры - с другим пользователем /с другом / с ботом.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В поле "Game type" выбираем нужного соперника
+    - Выбираем все остальные параметры
+    - Нажимаем "Create battle"
+  expected-result: |
+    Создана новая игра с выбранными параметрами
+
+- summary: |
+    Выбор соперника.
+  requirement: |
+    При выборе типа игры "с другом" появляется поисковая строка для ввода никнейма.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В поле "Game type" выбираем "With a friend"
+  expected-result: |
+    Появляется поисковая строка "Choose opponent" для ввода никнейма
+
+- summary: |
+    Параметры игры.
+  requirement: |
+    Пользователь может выбрать игровую задачу по названию.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В поле "Choose task by name" выбираем название задачи
+    - Выбираем все остальные параметры
+  expected-result: |
+    Создана новая игра с выбранными параметрами
+
+- summary: |
+    Параметры игры.
+  requirement: |
+    Пользователь может выбрать игровую задачу по тэгам.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В поле "Choose task tags" выбираем нужный вариант
+    - Выбираем все остальные параметры
+  expected-result: |
+    Создана новая игра с выбранными параметрами
+
+- summary: |
+    Параметры игры.
+  requirement: |
+    Пользователь может установить временные рамки для игры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В поле "Time control" выбираем нужный вариант
+    - Выбираем все остальные параметры
+  expected-result: |
+    Создана новая игра с выбранным ограничением по времени
+
+- summary: |
+    Создание игры.
+  requirement: |
+    Пользователь перенаправляется на страницу созданной игры с учетом указанных им параметров.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Настраиваем параметры 
+  expected-result: |
+    После нажатия кнопки "Create battle" открывается страница созданной игры
+
+- summary: |
+    Гайд для пользователя.
+  requirement: |
+    На странице созданной игры появляется модальное окно с гайдом - карта игровой страницы.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    На странице созданной игры есть модальное окно с гайдом по игре
+
+- summary: |
+    Темная/светлая тема.
+  requirement: |
+    Есть возможность выбора темы отображения редактора кода - Light/Dark.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - Над редактором кода нажимаем кнопку выбора темы (иконка солнца/луны)
+  expected-result: |
+    Тема редактора кода меняется в зависимости от выбора пользователя на темную/светлую
+
+- summary: |
+    Выбор языка программирования в игре.
+  requirement: |
+    Во время игры можно выбрать язык программирования для решения задачи.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - Над редактором кода нажимаем кнопку выбора языка программирования
+  expected-result: |
+    Выбранный язык автоматически применяется к редактору кода
+
+- summary: |
+    Редактор кода.
+  requirement: |
+    Во время игры пользователю доступен редактор кода для написания решения задачи.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    На странице игры есть редактор для написания кода решения задачи
+
+- summary: |
+    Редактор кода.
+  requirement: |
+    Все строки редактора пронумерованы.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    Каждая строка в редакторе для написания кода пронумерована
+
+- summary: |
+    Редактор кода.
+  requirement: |
+    Редактор кода принимает символы русского/английского языка и спецсимволы.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В поле для кода вводим символы русского/английского языка и спецсимволы
+  expected-result: |
+    Все символы отображаются корректно
+
+- summary: |
+    Редактор кода.
+  requirement: |
+    Во время игры пользователь может видеть редактор кода противника в режиме онлайн.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    С правой стороны отображается редактор с кодом противника
+
+- summary: |
+    Нумерация строк.
+  requirement: |
+    Все строки редактора кода пронумерованы.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    Каждая строка в редакторе кода пронумерована
+
+- summary: |
+    Язык текста задачи.
+  requirement: |
+    Пользователь может менять язык задачи с RU на EN и наоборот.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В поле, где написана задача, нажимаем кнопку EN/RU
+    - Меняем язык на нужный
+  expected-result: |
+    Текст задачи отображается на выбранном пользователем языке
+
+- summary: |
+    Ввод символов.
+  requirement: |
+    Редактор кода принимает символы русского/английского языка и спецсимволы.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе кода вводим символы русского/английского языка и спецсимволы
+  expected-result: |
+    Все символы отображаются корректно
+
+- summary: |
+    Редактор кода противника.
+  requirement: |
+    Во время игры пользователь может видеть редактор кода противника в режиме онлайн.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    С правой стороны отображается редактор кода противника
+
+- summary: |
+    Сброс прогресса.
+  requirement: |
+    Во время игры можно сбросить редактор кода к первоначальному виду.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - Пишем код в редакторе
+    - Справа над своим игровым полем находим кнопку с тремя точками
+    - Нажимаем и выбираем "Reset Solution"
+  expected-result: |
+    Весь написанный код удален, редактор кода вернулся к первоначальному виду
+
+- summary: |
+    Таймер игры.
+  requirement: |
+    Пользователь видит отсчет времени во время игры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+  expected-result: |
+    Справа над текстом задания отображается установленный при создании игры таймер с отсчетом времени
+
+- summary: |
+    Сдача сопернику.
+  requirement: |
+    Пользователь может сдаться во время игры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - Справа над своим игровым полем находим кнопку с тремя точками
+    - Нажимаем и выбираем "Give up"
+    - В появившемся модальном окне подтверждаем "Give up"
+  expected-result: |
+    Пользователь сдался, игра окончена
+
+- summary: |
+    Проверка решения.
+  requirement: |
+    Пользователь может самостоятельно проверить свое решение.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе кода пишем решение задачи
+    - Справа над редактором нажимаем кнопку "Run"
+  expected-result: |
+    В поле "OUTPUT" выводится написанный код
+
+- summary: |
+    Проверка решения.
+  requirement: |
+    Пользователь может самостоятельно проверить свое решение.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе кода пишем решение задачи
+    - Справа над редактором нажимаем кнопку "Run"
+  expected-result: |
+    Если решение неверное в "OUTPUT" выводится "Tests failed". Если решение верное,  в "OUTPUT" выводится "All tests passed"
+
+- summary: |
+    Победа в игре.
+  requirement: |
+    Победа присуждается пользователю, который первым правильно решил задачу.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе кода пишем решение задачи быстрее, чем противник
+    - Справа над редактором нажимаем кнопку "Run"
+    - Проверяем решение
+  expected-result: |
+    Пользователь побеждает в игре, если первым правильно решил задачу
+
+- summary: |
+    Победа/проигрыш в игре.
+  requirement: |
+    После победы/поражения в игре пользователю показывается победное модальное окно.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе пишем решение
+    - Побеждаем или проигрываем
+  expected-result: |
+    В случае победы или поражения на странице игры появляется модальное окно с оповещением о пободе/проигрыше
+
+- summary: |
+    Автоматическая проверка решения.
+  requirement: |
+    Правильность решения задачи определяет приложение.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе пишем решение
+    - Справа над редактором нажимаем кнопку "Run"
+  expected-result: |
+    Система сама автоматически проверяет решение пользователя на правильность
+
+- summary: |
+    Проигрыш в игре.
+  requirement: |
+    После поражения в игре возможно сделать "Rematch" игры.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - В редакторе пишем неверное решение
+    - Проигрываем
+    - Справа над редактором кода противника нажимаем кнопку "Rematch"
+  expected-result: |
+    После нажатия запускается новая игра с этим же противником с сохранением предыдущих настроек при создании игры.
+
+- summary: |
+    Завершение игры.
+  requirement: |
+    Игра завершается при победе/самостоятельной сдаче/победе противника/сдаче противника/завершении времени.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - Побеждаем
+    - Проигрываем
+    - Сдаемся
+    - Сдается противник
+    - Просто ждем, пока закончится игровое время
+  expected-result: |
+    В любом из перечисленных случаев игра завершается
+
+- summary: |
+    Начисление игровых очков.
+  requirement: |
+    За победу над другим пользователем начисляются очки.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Создаем игру с учетом желаемых параметров
+    - После создания оказываемся на странице игры
+    - Побеждаем
+  expected-result: |
+    Победившему пользователю начисляются очки
+
+- summary: |
+    Отмена игры.
+  requirement: |
+    Игру "Game type" = "with other users" можно отменить до тех пор, пока к ней не присоединится другой пользователь.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В "Game type" выбираем "with other user"
+    - Настраиваем остальные параметры, нажимаем "Create battle"
+    - На главной странице видим только что созданную игру
+    - На строке игры справа в самом конце нажимаем крестик
+  expected-result: |
+    Созданная игра отменена
+
+- summary: |
+    Отмена игры.
+  requirement: |
+    Игру "Game type" = "with other users" можно отменить до тех пор, пока к ней не присоединится другой пользователь.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В "Game type" выбираем "with other user"
+    - Настраиваем остальные параметры, нажимаем "Create battle"
+    - На главной странице видим только что созданную игру
+    - На строке игры в столбце "Actions" нажимаем кнопку "Continue"
+    - На открывшейся странице нажимаем "Cancel"
+  expected-result: |
+    Созданная игра отменена
+
+- summary: |
+    Обратная связь.
+  requirement: |
+    Пользователю доступна отправка обратной связи в окно "Send feedback".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Настраиваем параметры, нажимаем "Create battle"
+    - Переходим на страницу игры
+    - В правом нижнем углу нижимаем кнопку "Send feedback"
+    - В открывшемся окне пишем свои пожелания/замечания
+    - Нажимаем "Send feedback"
+  expected-result: |
+    Обратная связь отправлена
+
+- summary: |
+    Обратная связь.
+  requirement: |
+    Окно обратной связи разделено на 3 категории - "Bug"/"Improvement"/"Feature".
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - Настраиваем параметры, нажимаем "Create battle"
+    - Переходим на страницу игры
+    - В правом нижнем углу нижимаем кнопку "Send feedback"
+  expected-result: |
+    Окно обратной связи разделено на 3 категории — "Bug"/"Improvement"/"Feature"
+
+- summary: |
+    Приглашение на игру.
+  requirement: |
+    Пользователь может отправлять приглашение на игру другому пользователю.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В "Game type" выбираем "with a friend"
+    - В поле поиска вводим никнейм пользователя
+    - Нажимаем кнопку "Create invite"
+  expected-result: |
+    Приглашение на игру отображается цифрой на иконке с мечами. Цифра зависит от количества полученных приглашений на игру
+
+- summary: |
+    Приглашение на игру.
+  requirement: |
+    Пользователь может принять приглашение на игру от другого пользователя.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В "Game type" выбираем "with a friend"
+    - В поле поиска вводим никнейм пользователя
+    - Нажимаем кнопку "Create invite"
+    - Приглашение отображено на кнопке с мечами рядом с никнеймом пользователя
+    - Выбранный пользователь нажимает кнопку с мечами и выбирает "Accept"
+  expected-result: |
+    Приглашение принято, оба пользователя автоматически перенаправляются на страницу созданной игры
+
+- summary: |
+    Приглашение на игру.
+  requirement: |
+    Пользователь может отклонить приглашение на игру от другого пользователя.
+  prerequisites: |
+    Перейти на страницу "CodeBattle" по ссылке (https://codebattle.hexlet.io/).
+    Авторизоваться.
+  test-data: |
+    Nickname = "testmaster"
+    Email = "123testmaster@gmail.com"
+    Password = "123tester"
+  steps:
+    - После авторизации на главной странице нажимаем на кнопку "Create a game"
+    - В "Game type" выбираем "with a friend"
+    - В поле поиска вводим никнейм пользователя
+    - Нажимаем кнопку "Create invite"
+    - Приглашение отображено на кнопке с мечами рядом с никнеймом пользователя
+    - Выбранный пользователь нажимает кнопку с мечами и выбирает "Decline"
+  expected-result: |
+    Приглашение отклонено
