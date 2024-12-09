@@ -425,7 +425,7 @@
 
 - summary: |
     Игру "Game type" = "with other users" можно отменить до тех пор, пока к ней не присоединится другой пользователь
-  Status: pass
+  status: pass
 
 - summary: |
     Обратная связь
